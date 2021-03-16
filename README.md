@@ -1,5 +1,5 @@
 # Subindo uma instancia Postgres com Terraform
-Esse é um projeto feito pra realização de um exame admissional
+
 
 # Pré-requisitos
 AWS-CLI - Configurado e apontado para conta a qual quer subir a instancia de banco. REF:
