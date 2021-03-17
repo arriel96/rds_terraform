@@ -25,43 +25,36 @@ Seguindo a doc do Terraform:
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance
 
 Foi criado um script pra levantar  uma instancia rds com os seguintes parametros:
-  
-  
-
+.
+.
 
   ```bash
   instance_class       = "db.t2.micro"
   ```
 Foi usado uma instancia t2.micro, pois a mesma é a única versão free dentro da AWS. Em ambiente produtivo recomendaria uma versão maior com pelo menos 8GB de Ram e 4 Núcleos de CPU.
-
-
-
+.
+.
 
 ```bash
 #multi_az            = true
 ```
 Parâmetro para ativar o multi_az comentado pois o mesmo não se encontra na versão free da AWS.
-
-
-
+.
+.
 
 ```bash
 parameter_group_name = "config-banco"
 ```
 Parâmetro que vincula um grupo de parâmetros de banco ao database, foi criado no mesmo script e será comentado mais abaixo
-
-
-
-
+.
+.
   ```bash
   skip_final_snapshot  = true
   #delete_automated_backups = false
   ```
 Parâmetro que diz a AWS para não criar backup e manter backups após deleção, propósito dele está exclusivo para uso de testes não havendo necessidade de ficar salvando backups , não recomendado em ambientes produtivos.
-
-
-
-
+.
+.
  ```bash
   identifier           = "instanciateste"
   name                 = "teste"
@@ -70,10 +63,8 @@ Parâmetro que diz a AWS para não criar backup e manter backups após deleção
   port                 = 5432
   ```
 Informações da instância parâmetros de conexão e etc, name representa o nome do banco a ser criado , caso o mesmo não seja especificado não será criado um banco junto ao script de criação de instância.
-
-
-
-
+.
+.
  ```bash
   maintenance_window   = "Sun:00:00-Sun:01:59"
   backup_window        = "02:00-05:00"
