@@ -120,7 +120,7 @@ $ value = 105
 $ apply_method = "pending-reboot"
 ``` 
 Segundo algumas documentações o parâmetro de max_conections varia de acordo com o uso do banco, isso pode variar com implementação da aplicação, número de rotinas que são executados e processos background do mesmo. Como não tenho noção desses números mante o max conections de acordo com o padrão da AWS. 
-<br />Referencia:<br />
+<br />Referências:<br />
 https://www.cybertec-postgresql.com/en/tuning-max_connections-in-postgresql/<br />
 https://cloud.ibm.com/docs/databases-for-postgresql?topic=databases-for-postgresql-managing-connections<br />
 https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html#AuroraPostgreSQL.Managing.MaxConnections 
@@ -149,7 +149,7 @@ Parâmetro usado para definir o uso de memória das rotinas de manutenção e é
   - Sistemas grandes: 1 a 2 Gigabytes
   - Sistemas Muito grandes: 2 a 4 Gigabytes
 Auto-vaccum é sempre executado quando deadtuples=>autovacuum_vacuum_threshold + (scale_factor da tabela * numero total de tuplas).<br />
-Referencia:<br />
+Referências:<br />
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Autovacuum.html <br />
 https://aws.amazon.com/pt/blogs/database/a-case-study-of-tuning-autovacuum-in-amazon-rds-for-postgresql/ <br />
 https://www.datadoghq.com/blog/aws-rds-postgresql-monitoring/ <br />
