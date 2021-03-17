@@ -80,6 +80,7 @@ resource "aws_db_instance" "default" {
   engine_version       = "12.5"
   instance_class       = "db.t2.micro"
   parameter_group_name = "config-banco"
+  #multi_az            = true
 
   #Propósito de não salvar bkp durante testes.
   skip_final_snapshot  = true
@@ -111,9 +112,8 @@ resource "aws_db_instance" "default" {
 
   enabled_cloudwatch_logs_exports = ["postgresql"]
 
-  #multi_az            = true
   
-  #replicate_source_db  =
+  
   monitoring_interval  = 5
   monitoring_role_arn  = "arn:aws:iam::434761106183:role/monitoramento_avancado"
 

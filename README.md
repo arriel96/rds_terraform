@@ -65,4 +65,65 @@ Parâmetro que define se o banco pode iniciar atualização sozinho, apesar da A
 
   `monitoring_interval  = 5
   monitoring_role_arn  = "arn:aws:iam::434761106183:role/monitoramento_avancado"`
-Parâmetro que define o monitoramento avançado.
+Parâmetro que define o monitoramento avançado. Será coletado dados de 5 a 5 minutos.
+
+# Parâmetros de banco
+
+Parâmetros definidos no ParametersGroup, que definim o comportamento do banco
+
+
+```bash
+$ name  = "max_connections"
+$ value = 105
+$ apply_method = "pending-reboot"
+``` 
+Segundo algumas documentações o parâmetro de max_conections varia de acordo com o uso do banco, isso pode variar com implementação da aplicação, número de rotinas que são executados e processos background do mesmo. Como não tenho noção desses números mante o max conections de acordo com o padrão da AWS. Referencia:
+https://www.cybertec-postgresql.com/en/tuning-max_connections-in-postgresql/
+https://cloud.ibm.com/docs/databases-for-postgresql?topic=databases-for-postgresql-managing-connections
+https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html#AuroraPostgreSQL.Managing.MaxConnections 
+
+
+
+```bash
+$ name  = "autovacuum"
+$ value = true
+$ apply_method = "pending-reboot"
+```
+Parâmetro usado para ligar o autovacuum no servidor do banco. Autocacuum é um procedimento de remoção de linhas mortas e rbalancemento das linhas da tabela/index , o no meio desse procedimento também é realyzado o analyze(coleta de estatísticas para o optimizador). 
+
+
+```bash
+$ name  = "maintenance_work_mem"
+$ value = 180536
+$ apply_method = "pending-reboot"
+``` 
+Parâmetro usado para definir o uso de memória das rotinas de manutenção e é definido em KB. Foi definido os valores onde antes existia 65MB  e 3 workers, como temos somente uma tabela grande e outras menores , de acrodo com a documentação eu diminui o numero de workers e aumentei a memória, por motivo de falta de recurso foi usado a mémoria padrão como base. Recomendações da AWS:
+  - Tabela maiores: menos workers + memoria
+  - Varias tabelas pequenas: mais workers - memoria
+  - Usar uma quantidade de memória disponível na máquina. Analisar memória disponível
+  - Numero de Workers * Memoria alocada <= Memoria sobrando
+  - Sistemas grandes: 1 a 2 Gigabytes
+  - Sistemas Muito grandes: 2 a 4 Gigabytes
+Auto-vaccum é sempre executado quando deadtuples=>autovacuum_vacuum_threshold + (scale_factor da tabela * numero total de tuplas)
+Referencia:
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Autovacuum.html
+https://aws.amazon.com/pt/blogs/database/a-case-study-of-tuning-autovacuum-in-amazon-rds-for-postgresql/
+https://www.datadoghq.com/blog/aws-rds-postgresql-monitoring/
+https://www.2ndquadrant.com/en/blog/autovacuum-tuning-basics/
+
+```bash
+$ name  = "autovacuum_max_workers"
+$ value = 1
+$ apply_method = "pending-reboot"
+``` 
+Parâmetro usado para definir o número de workers de autovaccum, usar recomendações acima.
+
+
+
+```bash
+$ name  = "rds.adaptive_autovacuum"
+$ value = 1
+$ apply_method = "immediate"
+``` 
+Além dos parâmetros acima existem alguns outros parâmetros dinâmicos a respeito do auto-vaccum, mas este parâmetro do RDS é um parâmetro inteligente que atualiza esses valores conforme a necessidade.
+
