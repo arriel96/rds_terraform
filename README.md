@@ -119,15 +119,13 @@ $ name  = "max_connections"
 $ value = 105
 $ apply_method = "pending-reboot"
 ``` 
-Segundo algumas documentações o parâmetro de max_conections varia de acordo com o uso do banco, isso pode variar com implementação da aplicação, número de rotinas que são executados e processos background do mesmo. Como não tenho noção desses números mante o max conections de acordo com o padrão da AWS. Referencia:
-
-https://www.cybertec-postgresql.com/en/tuning-max_connections-in-postgresql/
-
-https://cloud.ibm.com/docs/databases-for-postgresql?topic=databases-for-postgresql-managing-connections
-
+Segundo algumas documentações o parâmetro de max_conections varia de acordo com o uso do banco, isso pode variar com implementação da aplicação, número de rotinas que são executados e processos background do mesmo. Como não tenho noção desses números mante o max conections de acordo com o padrão da AWS. 
+<br />Referencia:<br />
+https://www.cybertec-postgresql.com/en/tuning-max_connections-in-postgresql/<br />
+https://cloud.ibm.com/docs/databases-for-postgresql?topic=databases-for-postgresql-managing-connections<br />
 https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Managing.html#AuroraPostgreSQL.Managing.MaxConnections 
-
-
+<br />
+_________________________________________________________________________________________________________
 
 ```bash
  name  = "autovacuum"
@@ -135,7 +133,8 @@ https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Ma
  apply_method = "pending-reboot"
 ```
 Parâmetro usado para ligar o autovacuum no servidor do banco. Autocacuum é um procedimento de remoção de linhas mortas e rbalancemento das linhas da tabela/index , o no meio desse procedimento também é realyzado o analyze(coleta de estatísticas para o optimizador). 
-
+<br />
+_________________________________________________________________________________________________________
 
 ```bash
  name  = "maintenance_work_mem"
