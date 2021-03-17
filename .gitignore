@@ -1,8 +1,10 @@
 /rds-write/*.tfstate
 /rds-write/*.backup
 /rds-write/.terraform
+/rds-write/*.lock.hcl
 
 
 /rds-read/*.tfstate
 /rds-read/*.backup
 /rds-read/.terraform
+/rds-read/*.lock.hcl
