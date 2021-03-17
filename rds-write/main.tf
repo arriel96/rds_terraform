@@ -86,10 +86,10 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot  = true
   #delete_automated_backups = false
 
-  identifier           = "instanciateste"
+  identifier           = var.instance_name
   name                 = "teste"
-  username             = "postgres"
-  password             = "senhadodb"
+  username             = var.usuario
+  password             = var.senha
   port                 = 5432
   
   
