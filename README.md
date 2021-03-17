@@ -2,7 +2,7 @@
 
 
 # Pré-requisitos
-AWS-CLI - Configurado e apontado para conta a qual quer subir a instancia de banco. Referências:<br />
+AWS-CLI - Configurado e apontado para conta a qual quer subir a instancia de banco. <br /> Referências:<br />
 https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
 <br />
 Projeto realizado com as versão: aws-cli/1.18.69
@@ -14,7 +14,7 @@ PS*1: Essa parte foi a que tive mais dificuldade de subir, segui muito a doc da 
 <br />
 PS*2 Para subir os projetos você precisará mudar as variáveis das respectíveis Subnet e SecurityGroup para os criados anteriormente.
 <br />
-Criação de role IAM para Monitoramento Avançado.
+Criação de role IAM para Monitoramento Avançado. <br />
 Referências:<br />
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html
 <br />
@@ -148,14 +148,14 @@ Parâmetro usado para definir o uso de memória das rotinas de manutenção e é
   - Numero de Workers * Memoria alocada <= Memoria sobrando
   - Sistemas grandes: 1 a 2 Gigabytes
   - Sistemas Muito grandes: 2 a 4 Gigabytes
-Auto-vaccum é sempre executado quando deadtuples=>autovacuum_vacuum_threshold + (scale_factor da tabela * numero total de tuplas)
+Auto-vaccum é sempre executado quando deadtuples=>autovacuum_vacuum_threshold + (scale_factor da tabela * numero total de tuplas).<br />
 Referencia:<br />
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.Autovacuum.html <br />
 https://aws.amazon.com/pt/blogs/database/a-case-study-of-tuning-autovacuum-in-amazon-rds-for-postgresql/ <br />
 https://www.datadoghq.com/blog/aws-rds-postgresql-monitoring/ <br />
 https://www.2ndquadrant.com/en/blog/autovacuum-tuning-basics/ <br />
 _________________________________________________________________________________________________________
-<br />
+
 ```bash
  name  = "autovacuum_max_workers"
  value = 1
@@ -164,7 +164,7 @@ ________________________________________________________________________________
 Parâmetro usado para definir o número de workers de autovaccum, usar recomendações acima.
 <br />
 _________________________________________________________________________________________________________
-<br />
+
 ```bash
  name  = "rds.adaptive_autovacuum"
  value = 1
