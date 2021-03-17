@@ -2,6 +2,8 @@
 
 export PGPASSWORD='senhadodb'
 
+psql -h instanciateste.c5epvr8cs5qy.us-east-1.rds.amazonaws.com -p 5432 -U postgres -d teste -f "base.sql"
+
 psql -h instanciateste.c5epvr8cs5qy.us-east-1.rds.amazonaws.com -p 5432 -U postgres -d teste -c "CREATE ROLE rds_pgaudit;"
 
 aws rds modify-db-parameter-group \
