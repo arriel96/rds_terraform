@@ -34,14 +34,10 @@ Parâmetro que vincula um grupo de parâmetros de banco ao database, foi criado 
 Parâmetro que diz a AWS para não criar backup e manter backups após deleção, propósito dele está exclusivo para uso de testes não havendo necessidade de ficar salvando backups , não recomendado em ambientes produtivos.
 
  `identifier           = "instanciateste"
- 
   name                 = "teste"
-  
   username             = "postgres"
-  
   password             = "senhadodb"
-  
-  port                 = 5432 `
+  port                 = 5432`
 Informações da instância parâmetros de conexão e etc, name representa o nome do banco a ser criado , caso o mesmo não seja especificado não será criado um banco junto ao script de criação de instância.
 
  `maintenance_window   = "Sun:00:00-Sun:01:59"
