@@ -1,0 +1,3 @@
+/rds-write/*.tfstate
+/rds-write/*.backup
+/rds-write/.terraform
