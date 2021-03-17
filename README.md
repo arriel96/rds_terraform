@@ -88,17 +88,17 @@ https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Ma
 
 
 ```bash
-$ name  = "autovacuum"
-$ value = true
-$ apply_method = "pending-reboot"
+ name  = "autovacuum"
+ value = true
+ apply_method = "pending-reboot"
 ```
 Parâmetro usado para ligar o autovacuum no servidor do banco. Autocacuum é um procedimento de remoção de linhas mortas e rbalancemento das linhas da tabela/index , o no meio desse procedimento também é realyzado o analyze(coleta de estatísticas para o optimizador). 
 
 
 ```bash
-$ name  = "maintenance_work_mem"
-$ value = 180536
-$ apply_method = "pending-reboot"
+ name  = "maintenance_work_mem"
+ value = 180536
+ apply_method = "pending-reboot"
 ``` 
 Parâmetro usado para definir o uso de memória das rotinas de manutenção e é definido em KB. Foi definido os valores onde antes existia 65MB  e 3 workers, como temos somente uma tabela grande e outras menores , de acrodo com a documentação eu diminui o numero de workers e aumentei a memória, por motivo de falta de recurso foi usado a mémoria padrão como base. Recomendações da AWS:
   - Tabela maiores: menos workers + memoria
@@ -119,17 +119,17 @@ https://www.datadoghq.com/blog/aws-rds-postgresql-monitoring/
 https://www.2ndquadrant.com/en/blog/autovacuum-tuning-basics/
 
 ```bash
-$ name  = "autovacuum_max_workers"
-$ value = 1
-$ apply_method = "pending-reboot"
+ name  = "autovacuum_max_workers"
+ value = 1
+ apply_method = "pending-reboot"
 ``` 
 Parâmetro usado para definir o número de workers de autovaccum, usar recomendações acima.
 
 
 
 ```bash
-$ name  = "rds.adaptive_autovacuum"
-$ value = 1
-$ apply_method = "immediate"
+ name  = "rds.adaptive_autovacuum"
+ value = 1
+ apply_method = "immediate"
 ``` 
 Além dos parâmetros acima existem alguns outros parâmetros dinâmicos a respeito do auto-vaccum, mas este parâmetro do RDS é um parâmetro inteligente que atualiza esses valores conforme a necessidade.
