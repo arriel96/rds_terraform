@@ -37,7 +37,7 @@ Parâmetro que diz a AWS para não criar backup e manter backups após deleção
   name                 = "teste"
   username             = "postgres"
   password             = "senhadodb"
-  port                 = 5432 `
+  port                 = 5432`
 Informações da instância parâmetros de conexão e etc, name representa o nome do banco a ser criado , caso o mesmo não seja especificado não será criado um banco junto ao script de criação de instância.
 
  `maintenance_window   = "Sun:00:00-Sun:01:59"
@@ -126,4 +126,3 @@ $ value = 1
 $ apply_method = "immediate"
 ``` 
 Além dos parâmetros acima existem alguns outros parâmetros dinâmicos a respeito do auto-vaccum, mas este parâmetro do RDS é um parâmetro inteligente que atualiza esses valores conforme a necessidade.
-
