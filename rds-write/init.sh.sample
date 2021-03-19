@@ -1,10 +1,15 @@
 #!/bin/sh
 
 export PGPASSWORD='senhadodb'
+export PGUSER='postgres'
 
-psql -h instanciateste.c5epvr8cs5qy.us-east-1.rds.amazonaws.com -p 5432 -U postgres -d teste -f "base.sql"
+host_db="instanciateste.c5epvr8cs5qy.us-east-1.rds.amazonaws.com"
 
-psql -h instanciateste.c5epvr8cs5qy.us-east-1.rds.amazonaws.com -p 5432 -U postgres -d teste -c "CREATE ROLE rds_pgaudit;"
+db_name="teste"
+
+psql -h $host_db -p 5432 -d $db_name -f "base.sql"
+
+psql -h $host_db -p 5432 -d $db_name -c "CREATE ROLE rds_pgaudit;"
 
 aws rds modify-db-parameter-group \
    --db-parameter-group-name config-banco \
@@ -39,7 +44,7 @@ aws rds reboot-db-instance \
 
 sleep 3m
 
-psql -h instanciateste.c5epvr8cs5qy.us-east-1.rds.amazonaws.com -p 5432 -U postgres -d teste -c "CREATE EXTENSION pgaudit;"
+psql -h $host_db -p 5432 -d $db_name -c "CREATE EXTENSION pgaudit;"
 
 aws logs put-metric-filter \
   --log-group-name /aws/rds/instance/instanciateste/postgresql \
