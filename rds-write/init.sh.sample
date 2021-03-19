@@ -1,11 +1,11 @@
 #!/bin/sh
 
-export PGPASSWORD='senhadodb'
-export PGUSER='postgres'
+export PGPASSWORD='sample'
+export PGUSER='sample'
 
-host_db="instanciateste.c5epvr8cs5qy.us-east-1.rds.amazonaws.com"
+host_db="sample"
 
-db_name="teste"
+db_name="sample"
 
 psql -h $host_db -p 5432 -d $db_name -f "base.sql"
 
