@@ -3,6 +3,7 @@
 /rds-write/.terraform
 /rds-write/*.lock.hcl
 /rds-write/variables.tf
+/rds-write/init.sh
 
 
 /rds-read/*.tfstate
