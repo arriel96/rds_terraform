@@ -21,9 +21,3 @@ variable "seg_group" {
   type        = string
   default     = "Sample"
 }
-
-variable "subnet__db" {
-  description = "Grupo de subrede a qual o banco será linkado"
-  type        = string
-  default     = "Sample"
-}

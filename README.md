@@ -10,9 +10,7 @@ Projeto realizado com as versão: aws-cli/1.18.69
 Configuração de rede criada, para receber o Postgres e com um security group aceitando conexão somente pro seu IP:<br />
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html
 <br />
-PS*1: Essa parte foi a que tive mais dificuldade de subir, segui muito a doc da AWS pra aplicar um configuração padrão então toda a parte de network do postgres apliquei sem muito conhecimento do que tava fazendo, a única parte que compreendi qual a função seria a do Security Grou, onde posso controlar o que irá acessar o meu banco. Agora a parte de criação de VPC e Subnet Groups eu segui a criação padrão da AWS na Doc.
-<br />
-PS*2 Para subir os projetos você precisará mudar as variáveis das respectíveis Subnet e SecurityGroup para os criados anteriormente.
+PS*2 Para subir o projeto você precisará mudar a variável di SecurityGroup para o criado anteriormente.
 <br />
 Criação de role IAM para Monitoramento Avançado. <br />
 Referências:<br />
@@ -77,10 +75,9 @@ ________________________________________________________________________________
 _________________________________________________________________________________________________________
   ```bash
   vpc_security_group_ids  =["sg-0449f712679e8775f"]
-  db_subnet_group_name    ="subnetdb"
   publicly_accessible = true
   ```
-Parâmetro usado para definir o security group e o dbsubnet usado no banco.
+Parâmetro usado para definir o security group usado no banco.
 <br />
 _________________________________________________________________________________________________________
   ```bash

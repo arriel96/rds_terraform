@@ -101,8 +101,7 @@ resource "aws_db_instance" "default" {
   ##Criei um securitu group manual com a regra de entrada tendo somente permissão 
   # para o meu IP e somente na porta 5432
   ###
-  vpc_security_group_ids  =["sg-0449f712679e8775f"]
-  db_subnet_group_name    ="subnetdb"
+  vpc_security_group_ids  =[var.seg_group]
   publicly_accessible = true
 
   performance_insights_enabled = true
