@@ -168,3 +168,97 @@ ________________________________________________________________________________
  apply_method = "immediate"
 ``` 
 Além dos parâmetros acima existem alguns outros parâmetros dinâmicos a respeito do auto-vaccum, mas este parâmetro do RDS é um parâmetro inteligente que atualiza esses valores conforme a necessidade.
+
+
+# Executando:
+
+  Com os pré-requisitos montados, baixe a pasta do projeto.</br>
+  Dentro da pasta rds-write crie cópias dos arquivos init.sh.sample e variables.tf.sample e renomeie os mesmos para init.sh e variables.tf respectivamente.</br>
+  Depois use o comandar para aplicar permissão de execução no arquivo init.sh:</br>
+  ```bash
+   cp init.sh.sample init.sh
+   cp variables.tf.sample variables.tf
+   chmod 550 init.sh
+  ``` 
+  Edite o arquivo variables.tf para definir : usuario, senha , nome da instancia(nao pode conter letra maiscula), nome do banco e id do security group.
+  Use os comandos terraform para levantar o banco:</br>
+
+  ```bash
+  terraform init
+  terraform apply
+  ```
+  Após alguns minutos a instância do banco deve subir sem erro.</br>
+
+  Após a instância tiver pronta edite as variaveis do arquivo init.sh com as informações de conexão do banco.</br>
+
+  Execute o arquivo init.sh, que irá executar um script para subir a base teste, criar role de auditoria , mudar os parametros do banco para auditoria, criar as metricas de auditoria para receber alertas em cima de drop e delete, reiniciar o banco de dados.</br>
+
+  Repita o processo do arquivo variables.tf.sample na pasta rds-read:</br>
+  ```bash
+  cp variables.tf.sample variables.tf
+  ``` 
+  
+  Após editar as varivéis execute o terraform para levantar a instancia de read-only:</br>
+  ```bash
+  terraform init
+  terraform apply
+  ``` 
+
+  Após a execução do comando init.sh , os alertas já podem ser configurados na CloudWatch para ser enviados via E-mail. Isso pode acontecer ao mesmo tempo que a instância de read-only sobe.</br></br>
+
+  Pelo console siga os passos da Doc da AWS para criar alarmes em cima das metricas criadas pelo scrip, são elas: DropCount e DeleteCount.</br>
+  https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create-alarm-on-metric-math-expression.html
+  </br>Dados do alarme:
+
+  ```bash
+  Estatistica: Soma
+  Período: 15min
+  Condições: Estático
+  Maior/Igual: 1
+  ```
+
+  Aplique a mesma configuração de alerta nas duas metricas criadas.
+
+# PGBench:
+
+Usando essas documentações como base foi aplicado o PGBench para análise. Doc: </br>
+https://www.cloudbees.com/blog/tuning-postgresql-with-pgbench/ </br>
+
+
+Comandos executados:
+```bash
+pgbench -i -h host -p 5432 -U usuario -d banco
+pgbench -c 10 -j 2 -t 1000 -h host -p 5432 -U usuario -d banco
+```
+
+</br></br>
+Primeiro Resultado
+```
+scaling factor: 1
+query mode: simple
+number of clients: 10
+number of threads: 2
+number of transactions per client: 1000
+number of transactions actually processed: 10000/10000
+latency average = 3787.990 ms
+tps = 2.639923 (including connections establishing)
+tps = 2.640737 (excluding connections establishing)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
