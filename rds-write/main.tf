@@ -103,6 +103,7 @@ resource "aws_db_instance" "default" {
   ###
   vpc_security_group_ids  =[var.seg_group]
   publicly_accessible = true
+  #db_subnet_group_name = ["subnetdb"]
 
   performance_insights_enabled = true
   performance_insights_retention_period = 7

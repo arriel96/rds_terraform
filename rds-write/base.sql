@@ -342,6 +342,5 @@ END$$;
 
 CREATE USER usarioconsulta WITH PASSWORD 'SuperSenhadoUsuario';
 GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO usarioconsulta;
-GRANT CONNECT ON DATABASE teste TO usarioconsulta;  
 
 
