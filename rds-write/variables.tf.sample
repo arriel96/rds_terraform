@@ -21,3 +21,8 @@ variable "seg_group" {
   type        = string
   default     = "Sample"
 }
+variable "nome_banco" {
+  description = "Nome do banco de dados"
+  type        = string
+  default     = "Sample"
+}

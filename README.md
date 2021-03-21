@@ -180,7 +180,7 @@ Além dos parâmetros acima existem alguns outros parâmetros dinâmicos a respe
    cp variables.tf.sample variables.tf
    chmod 550 init.sh
   ``` 
-  Edite o arquivo variables.tf para definir : usuario, senha , nome da instancia(nao pode conter letra maiscula), nome do banco e id do security group.
+  Edite o arquivo variables.tf para definir : usuario, senha , nome da instancia(nao pode conter letra maiscula), nome do banco e id do security group.</br>
   Use os comandos terraform para levantar o banco:</br>
 
   ```bash
@@ -227,12 +227,12 @@ https://www.cloudbees.com/blog/tuning-postgresql-with-pgbench/ </br>
 
 Comandos executados:
 ```bash
-pgbench -i -h host -p 5432 -U usuario -d banco
-pgbench -c 10 -j 2 -t 1000 -h host -p 5432 -U usuario -d banco
+pgbench -i -h host -p 5432 -U usuario banco
+pgbench -c 10 -j 4 -t 100 -h host -p 5432 -U usuario -d nome_do_banco
 ```
 
 </br></br>
-Primeiro Resultado
+Primeira execuxão:
 ```
 scaling factor: 1
 query mode: simple
@@ -243,22 +243,32 @@ number of transactions actually processed: 10000/10000
 latency average = 3787.990 ms
 tps = 2.639923 (including connections establishing)
 tps = 2.640737 (excluding connections establishing)
-
 ```
 
+Notei que teve uma latência alta e um baixo número de transações por segundo, alterei o parâmetro de shared_buffers como blog, mas aparentemente não houve muita diferença nos valores. Esse resultado pode ser efeito da máquina fraca da instância ou da latência entre o meu PC (onde foi executado) e a instância. De qualquer forma procurei alguns artigos relacionados e não achei muita coisa sobre como aumentar a performance do PGBench.
+Fica o último resultado após a mudança do parametro de shared_buffers
 
+```
+scaling factor: 1
+query mode: simple
+number of clients: 10
+number of threads: 4
+number of transactions per client: 100
+number of transactions actually processed: 1000/1000
+latency average = 3773.549 ms
+tps = 2.650025 (including connections establishing)
+tps = 2.658245 (excluding connections establishing)
+statement latencies in milliseconds:
+         0.056  \set aid random(1, 100000 * :scale)
+         0.058  \set bid random(1, 1 * :scale)
+         0.046  \set tid random(1, 10 * :scale)
+         0.042  \set delta random(-5000, 5000)
+       184.889  BEGIN;
+       185.853  UPDATE pgbench_accounts SET abalance = abalance + :delta WHERE aid = :aid;
+       185.823  SELECT abalance FROM pgbench_accounts WHERE aid = :aid;
+      1053.514  UPDATE pgbench_tellers SET tbalance = tbalance + :delta WHERE tid = :tid;
+      1668.840  UPDATE pgbench_branches SET bbalance = bbalance + :delta WHERE bid = :bid;
+       185.290  INSERT INTO pgbench_history (tid, bid, aid, delta, mtime) VALUES (:tid, :bid, :aid, :delta, CURRENT_TIMESTAMP);
+       186.173  END;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```

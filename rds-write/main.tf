@@ -87,7 +87,7 @@ resource "aws_db_instance" "default" {
   #delete_automated_backups = false
 
   identifier           = var.instance_name
-  name                 = "teste"
+  name                 = var.nome_banco
   username             = var.usuario
   password             = var.senha
   port                 = 5432

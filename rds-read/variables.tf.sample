@@ -1,0 +1,16 @@
+variable "instance_base" {
+  description = "Nome da instancia RDS  qual ele será a base de READ"
+  type        = string
+  default     = "Sample"
+}
+
+variable "seg_group" {
+  description = "Id do grupo de segurança a qual será Linkado o Banco de dados"
+  type        = string
+  default     = "Sample"
+}
+variable "nome" {
+  description = "Nome da instancia"
+  type        = string
+  default     = "Sample"
+}

@@ -27,16 +27,16 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot  = true
   #delete_automated_backups = false
 
-  identifier           = "readteste"
+  identifier           = var.nome
   port                 = 5432
-  replicate_source_db  = "instanciateste"
+  replicate_source_db  = var.instance_base
   
 
   ###
   ##Criei um securitu group manual com a regra de entrada tendo somente permissão 
   # para o meu IP e somente na porta 5432
   ###
-  vpc_security_group_ids  =["sg-0449f712679e8775f"]
+  vpc_security_group_ids  =[var.seg_group]
   publicly_accessible = true
 
   performance_insights_enabled = true
