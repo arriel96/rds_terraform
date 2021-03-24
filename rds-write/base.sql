@@ -82,6 +82,7 @@ CREATE TABLE envio (
 );
 
 
+/*Funções de controle*/
 
 CREATE FUNCTION trg_funcao_add_preco_sacola()
     RETURNS trigger
@@ -184,6 +185,43 @@ $$ language 'plpgsql'
 STRICT;
 
 
+/*Parâmetros do autovaccum e analyze*/
+
+ALTER TABLE usuarios SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 10000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 10000
+                                      );
+ALTER TABLE enderecos SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 10000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 10000
+                                      );
+ALTER TABLE produtos SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 100000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 100000
+                                      );
+ALTER TABLE sacolas SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 50000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 50000
+                                      );
+ALTER TABLE sacola_produtos SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 50000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 50000
+                                      );
+ALTER TABLE envio SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 30000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 30000
+                                      );
+
+
+
+
+/*Inserts*/
 
 do $$ 
 DECLARE

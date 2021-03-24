@@ -169,6 +169,65 @@ ________________________________________________________________________________
 ``` 
 Além dos parâmetros acima existem alguns outros parâmetros dinâmicos a respeito do auto-vaccum, mas este parâmetro do RDS é um parâmetro inteligente que atualiza esses valores conforme a necessidade.
 
+# Parâmetros autovaccum:
+
+Além dos parâmetros acima foi modificado os parâmetros de analyze e vaccum das tabelas, lembrando uqe a formula seria thresold+numero_de_tupla*scale_factor.
+Seguindo essas docs:
+https://www.cybertec-postgresql.com/en/tuning-autovacuum-postgresql/
+https://www.2ndquadrant.com/en/blog/autovacuum-tuning-basics/
+
+```
+ALTER TABLE usuarios SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 10000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 10000
+                                      );
+ALTER TABLE enderecos SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 10000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 10000
+                                      );
+ALTER TABLE produtos SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 100000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 100000
+                                      );
+ALTER TABLE sacolas SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 50000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 50000
+                                      );
+ALTER TABLE sacola_produtos SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 50000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 50000
+                                      );
+ALTER TABLE envio SET (autovacuum_vacuum_scale_factor = 0,
+                                      autovacuum_vacuum_threshold = 30000,
+                                      autovacuum_analyze_scale_factor = 0,
+                                      autovacuum_analyze_threshold = 30000
+                                      );
+```
+Foi removido zerado o factor para que trabalhemos somente com números inteiros. Autovaccum em si ja chama o analyze mas o mesmo só ocorre quando temos um X numero de tuplas mortas enquanto o analyze pode ser contado a partir dos números de operações: INSERT,UPDATE,DELETE (Note que insert não gera tuplas mortas).</br>
+O valor a ser setado nesses parâmetros vai de acordo com o uso esperado das tabelas, seu crescimento e valor de linhas atuais.</br>
+Para um controle melhor achei melhor usar valores exatos no threshold.</br>
+
+Tabela usuarios: Valor definido em 10.000 , pois não existem muitos problemas de performance em tabelas com esse valor ou menor, não se espera um crescimento muito alto nessa tabela (podem surgir alguns picos mas normalmente é uma entrada constante e não muito alta de volume, além de estar começando em um valor ok).</br>
+
+Tabela enderecos: Segue o mesmo crescimento da usuário, um usuário pode ter N enderecos , mas não se espera que ela ultrapasse 5x o tamanho da tabela usuário. Valor inicial o mesmo da tabela usuário.</br>
+
+Tabela de produtos: Foi definido um número de 100.000 pois a mesma seria a tabela mas frequentemente utilizada/atualizada e com maior número de dados.</br>
+
+Tabela de sacolas:Foi definido em 50000, ela deve acompanhar o crescimento da tabela produtos, determina o numero de vendas realizadas/canceladas na aplicação. Como não tem o mesmo numero de dados que a Produtos.</br>
+
+Tabela de sacola_produtos: Foi definido em 50000, ela deve acompanhar o crescimento da tabela sacolas, determina o numero de vendas realizadas/canceladas na aplicação. Como não tem o mesmo numero de dados que a Produtos.</br>
+
+Tabela de envios:  Foi definido um valor de 30000. Inicialmente não tem dados , mas a mesma não deve superar o numero de sacolas , visto que só ocorrerá no caso onde o processo da sacola seja concluído.</br>
+Referência:</br>
+https://www.percona.com/blog/2018/08/10/tuning-autovacuum-in-postgresql-and-autovacuum-internals/ </br>
+https://cybertec-postgresql.com/en/tuning-autovacuum-postgresql/ </br>
+https://www.netiq.com/documentation/cloud-manager-2-5/ncm-install/data/vacuum.html </br>
+https://www.postgresql.org/docs/12/runtime-config-autovacuum.html </br>
 
 # Executando:
 
