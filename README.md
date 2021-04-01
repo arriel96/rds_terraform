@@ -331,3 +331,15 @@ statement latencies in milliseconds:
        186.173  END;
 
 ```
+</br>
+</br>
+PS:</br>
+Aparentmente o comando:</br>
+```
+GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO usarioconsulta;
+```</br>
+Não funciona para tabela futuras, para funcionar em tabelas futuras deve se alterar a permissão padrão do schema:
+```
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO usarioconsulta;
+```</br>
+Não adicionei no projeto pois ja tinha feito a entrega do mesmo , mas fica a possível solução.
