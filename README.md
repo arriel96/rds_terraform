@@ -334,11 +334,13 @@ statement latencies in milliseconds:
 </br>
 </br>
 PS:</br>
-Aparentmente o comando:</br>
+Aparentmente o comando: </br> 
 
 ``` 
 GRANT SELECT ON ALL TABLES IN SCHEMA PUBLIC TO usarioconsulta;
-``` </br>
+``` 
+</br>
+
 Não funciona para tabela futuras, para funcionar em tabelas futuras deve se alterar a permissão padrão do schema:
 
 ```
