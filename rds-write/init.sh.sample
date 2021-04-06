@@ -7,6 +7,8 @@ host_db="sample"
 
 db_name="sample"
 
+inst_name="minhainstancia"
+
 psql -h $host_db -p 5432 -d $db_name -f "base.sql"
 
 psql -h $host_db -p 5432 -d $db_name -c "CREATE ROLE rds_pgaudit;"
@@ -31,6 +33,7 @@ aws rds modify-db-parameter-group \
    --parameters "ParameterName=pgaudit.log_level,ParameterValue=info,ApplyMethod=pending-reboot" \
    --region us-east-1
 
+#mostra os parametros no log 
 aws rds modify-db-parameter-group \
    --db-parameter-group-name config-banco \
    --parameters "ParameterName=pgaudit.log_statement_once,ParameterValue=1,ApplyMethod=pending-reboot" \
@@ -39,7 +42,7 @@ aws rds modify-db-parameter-group \
 sleep 2m
 
 aws rds reboot-db-instance \
-    --db-instance-identifier instanciateste \
+    --db-instance-identifier $inst_name \
     --region us-east-1
 
 sleep 3m
@@ -47,14 +50,14 @@ sleep 3m
 psql -h $host_db -p 5432 -d $db_name -c "CREATE EXTENSION pgaudit;"
 
 aws logs put-metric-filter \
-  --log-group-name /aws/rds/instance/instanciateste/postgresql \
+  --log-group-name /aws/rds/instance/$inst_name/postgresql \
   --filter-name DeleteCount \
   --filter-pattern 'DELETE' \
   --metric-transformations \
       metricName=MetricaDelete,metricNamespace=MetricaDelete,metricValue=1,defaultValue=0
 
 aws logs put-metric-filter \
-  --log-group-name /aws/rds/instance/instanciateste/postgresql \
+  --log-group-name /aws/rds/instance/$inst_name/postgresql \
   --filter-name DropCount \
   --filter-pattern 'DROP' \
   --metric-transformations \
