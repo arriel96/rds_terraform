@@ -72,7 +72,7 @@ ________________________________________________________________________________
   backup_window        = "02:00-05:00"
   backup_retention_period = 7
   ```
-  Janela de backup e manutenção respectivamente, estão setadas em fuso horário diferente, sendo 21:00 as 22:59 sábado, e o backup das 23:00 ás 02:00. Período de retenção de backup de 7 dias, tba usado para point in time recovery. 
+  Janela de backup e manutenção respectivamente, estão setadas em fuso horário diferente, sendo 21:00 as 22:59 sábado, e o backup das 23:00 ás 02:00. Período de retenção de backup de 7 dias, também usado para point in time recovery. 
 <br />
 _________________________________________________________________________________________________________
   ```bash
