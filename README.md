@@ -252,7 +252,11 @@ https://www.postgresql.org/docs/12/runtime-config-autovacuum.html </br>
 
   Após a instância tiver pronta edite as variaveis do arquivo init.sh com as informações de conexão do banco.</br>
 
-  Execute o arquivo init.sh, que irá executar um script para subir a base teste, criar role de auditoria , mudar os parametros do banco para auditoria, criar as metricas de auditoria para receber alertas em cima de drop e delete, reiniciar o banco de dados.</br>
+  Execute o arquivo init.sh, que irá executar um script para subir a base teste, criar role de auditoria , mudar os parametros do banco para auditoria, criar as metricas de auditoria para receber alertas em cima de drop e delete, reiniciar o banco de dados:</br>
+  ```bash
+ ./init.sh
+``` 
+</br>
 
   Repita o processo do arquivo variables.tf.sample na pasta rds-read:</br>
   ```bash
