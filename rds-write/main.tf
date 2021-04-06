@@ -116,7 +116,7 @@ resource "aws_db_instance" "default" {
   
   monitoring_interval  = 5
   monitoring_role_arn  = "arn:aws:iam::434761106183:role/monitoramento_avancado"
-
+  ### TINHA QUE TER ENTRADO COMO VARIAVEL
 
 
 }
