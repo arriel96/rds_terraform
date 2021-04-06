@@ -271,7 +271,7 @@ https://www.postgresql.org/docs/12/runtime-config-autovacuum.html </br>
 
   Após a execução do comando init.sh , os alertas já podem ser configurados na CloudWatch para ser enviados via E-mail. Isso pode acontecer ao mesmo tempo que a instância de read-only sobe.</br></br>
 
-  Pelo console siga os passos da Doc da AWS para criar alarmes em cima das metricas criadas pelo scrip, são elas: DropCount e DeleteCount.</br>
+  Pelo console siga os passos da Doc da AWS para criar alarmes em cima das metricas criadas pelo script, são elas: DropCount e DeleteCount.</br>
   https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create-alarm-on-metric-math-expression.html
   </br>Dados do alarme:
 
