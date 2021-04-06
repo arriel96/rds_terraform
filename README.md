@@ -10,7 +10,9 @@ Projeto realizado com as versão: aws-cli/1.18.69
 Configuração de rede criada, para receber o Postgres e com um security group aceitando conexão somente pro seu IP:<br />
 https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html
 <br />
-PS*2 Para subir o projeto você precisará mudar a variável di SecurityGroup para o criado anteriormente.
+PS*2 Para subir o projeto você precisará mudar a variável de SecurityGroup para o criado anteriormente.
+<br />
+<br />
 <br />
 Criação de role IAM para Monitoramento Avançado. <br />
 Referências:<br />
